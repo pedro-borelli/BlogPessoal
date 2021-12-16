@@ -43,6 +43,11 @@ public class Postagem {
 	@JsonIgnoreProperties ("postagem")
 	private Tema tema;
 	
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "usuario")
+	@JsonIgnoreProperties ("postagem")
+	private Usuario usuario;
+	
 	public long getId() {
 		return id;
 	}
