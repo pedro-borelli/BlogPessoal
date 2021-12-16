@@ -8,8 +8,11 @@ import org.generation.blogpessoal.model.UserLogin;
 import org.generation.blogpessoal.model.Usuario;
 import org.generation.blogpessoal.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UsuarioService {
@@ -17,13 +20,19 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 	
-	public Usuario CadastrarUsuario(Usuario usuario) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	public ResponseEntity<Usuario> cadastrarUsuario(Usuario usuario) {
+		Optional<Usuario> optional = repository.findByUsuario(usuario.getUsuario());
 		
-		String senhaEncoder = encoder.encode(usuario.getSenha());
-		usuario.setSenha(senhaEncoder);
+		if (optional.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email ja existe!");
+		} else {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String senhaEncoder = encoder.encode(usuario.getSenha());
+			usuario.setSenha(senhaEncoder);
+			
+			return ResponseEntity.status(201).body(repository.save(usuario));
+		}
 		
-		return repository.save(usuario);
 	}
 	
 	public Optional<UserLogin> Logar(Optional<UserLogin> user) {
