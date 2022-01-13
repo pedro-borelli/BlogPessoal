@@ -35,6 +35,10 @@ public class SwaggerConfig {
 							    .url("https://github.com/pedro-borelli/BlogPessoal"));
 	}
 	
+	private ApiResponse createApiResponse (String message) {
+		return new ApiResponse().description(message); 
+	}
+	
 	@Bean
 	public OpenApiCustomiser customerGlobalHeaderOpenApiCustomiser () {
 		return OpenApiCustomiser -> {
@@ -51,10 +55,6 @@ public class SwaggerConfig {
 				apiResponses.addApiResponse("500", createApiResponse("Erro na Aplicação!"));
 			}));
 		};
-	}
-
-	private ApiResponse createApiResponse (String message) {
-		return new ApiResponse().description(message); 
 	}
 }
 

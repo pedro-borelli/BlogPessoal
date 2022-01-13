@@ -1,6 +1,5 @@
 package org.generation.blogpessoal.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,26 +14,26 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "tb_tema")
+@Table(name = "tb_temas")
 
 public class Tema {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
-	@NotNull
+	@NotNull(message = "O atributo Descrição é obrigatório")
 	private String descricao;
 	
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("tema")
-	private List<Postagem> postagem = new ArrayList<>();
+	private List<Postagem> postagem;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
