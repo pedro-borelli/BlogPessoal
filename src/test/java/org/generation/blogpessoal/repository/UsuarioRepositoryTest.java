@@ -25,13 +25,13 @@ public class UsuarioRepositoryTest {
 	@BeforeAll
 	void start(){
 		
-		usuarioRepository.save(new Usuario (0L, "João da Silva","link da foto","joao@email.com.br", "13465278")); 
+		usuarioRepository.save(new Usuario (0L, "João da Silva","link da foto","tipo","joao@email.com.br", "13465278")); 
 		
-		usuarioRepository.save(new Usuario (0L, "Manuela da Silva","link da foto", "manuela@email.com.br", "13465278"));
+		usuarioRepository.save(new Usuario (0L, "Manuela da Silva","link da foto","tipo", "manuela@email.com.br", "13465278"));
 		
-		usuarioRepository.save(new Usuario (0L, "Adriana da Silva","link da foto", "adriana@email.com.br", "13465278"));
+		usuarioRepository.save(new Usuario (0L, "Adriana da Silva","link da foto","tipo", "adriana@email.com.br", "13465278"));
 		
-		usuarioRepository.save(new Usuario (0L, "Paulo Antunes","link da foto", "paulo@email.com.br", "13465278"));
+		usuarioRepository.save(new Usuario (0L, "Paulo Antunes","link da foto","tipo", "paulo@email.com.br", "13465278"));
 		
 	}
 	

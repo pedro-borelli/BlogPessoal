@@ -37,7 +37,7 @@ public class UsuarioControllerTest {
 	@DisplayName("Cadastrar Um Usuário")
 	public void deveCriarUmUsuario() {
 		
-		HttpEntity<Usuario> requisicao = new HttpEntity<Usuario>(new Usuario(0L,"Paulo Antunes","link da foto","paulo_antunes@email.com.br","13465278"));
+		HttpEntity<Usuario> requisicao = new HttpEntity<Usuario>(new Usuario(0L,"Paulo Antunes","link da foto","tipo","paulo_antunes@email.com.br","13465278"));
 		
 		ResponseEntity<Usuario> resposta = testRestTemplate
 		.exchange("/usuarios/cadastrar", HttpMethod.POST, requisicao, Usuario.class);
@@ -53,10 +53,10 @@ public class UsuarioControllerTest {
 	public void naoDeveDuplicarUsuario() {
 		
 		usuarioService.cadastrarUsuario(new Usuario(0L,
-			"Maria da Silva","link da foto","maria_silva@email.com.br","13465278"));
+			"Maria da Silva","link da foto","tipo","maria_silva@email.com.br","13465278"));
 		
 		HttpEntity<Usuario> requisicao = new HttpEntity<Usuario>(new Usuario(0L,
-			"Maria da Silva","link da foto","maria_silva@email.com.br","13465278"));
+			"Maria da Silva","link da foto","tipo","maria_silva@email.com.br","13465278"));
 		
 		ResponseEntity<Usuario> resposta = testRestTemplate
 			.exchange("/usuarios/cadastrar",HttpMethod.POST, requisicao, Usuario.class);
@@ -71,11 +71,11 @@ public class UsuarioControllerTest {
 	public void deveAtualizarUmUsuario() {
 		
 		
-		Optional<Usuario> response = usuarioService.cadastrarUsuario(new Usuario(0L,"Juliana Andrews","link da foto","juliana_andrews@email.com.br","juliana123"));
+		Optional<Usuario> response = usuarioService.cadastrarUsuario(new Usuario(0L,"Juliana Andrews","link da foto","tipo","juliana_andrews@email.com.br","juliana123"));
 				
 		HttpEntity<Usuario> requisicao = new HttpEntity<Usuario>(
 				new Usuario(response.get().getId(),
-				"Juliana Andrews Ramos","link da foto","juliana_ramos@email.com.br","juliana123"));
+				"Juliana Andrews Ramos","link da foto","tipo","juliana_ramos@email.com.br","juliana123"));
 		
 		ResponseEntity<Usuario> resposta = testRestTemplate
 			.withBasicAuth("juliana_andrews@email.com.br","juliana123")
@@ -92,10 +92,10 @@ public class UsuarioControllerTest {
 	public void deveMostrarTodosUsuarios() {
 		
 		usuarioService.cadastrarUsuario(new Usuario (0L,
-			"Sabrina Sanches","link da foto","sabrina_sanches@email.com.br","sabrina123"));
+			"Sabrina Sanches","link da foto","tipo","sabrina_sanches@email.com.br","sabrina123"));
 	
 		usuarioService.cadastrarUsuario(new Usuario (0L,
-			"Ricardo Marques","link da foto","ricardo_marques@email.com.br","ricardo123"));
+			"Ricardo Marques","link da foto","tipo","ricardo_marques@email.com.br","ricardo123"));
 		
 		ResponseEntity<String> resposta = testRestTemplate
 			.withBasicAuth("tonello", "tonello")
