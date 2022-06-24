@@ -1,2 +1,2 @@
 # BlogPessoal
-Blog desenvolvido no bootcamp Generation.
+Blog desenvolvido no bootcamp Generation
